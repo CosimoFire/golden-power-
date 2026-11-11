@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Come funziona il golden power</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{--blu:#169cdc;--blu-scuro:#0b6fa3;--ink:#1a1a1a;--ink2:#444;--muted:#6b6b6b;--grigio:#9b9b9b;--grigio-chiaro:#d9d9d9;--scuro:#3b3b3b;--panel:#f0f0f0;--bordo:#bdbdbd}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff}
+body{font-family:"Source Serif 4",Georgia,serif;color:var(--ink);font-size:16px;line-height:1.45}
+.wrap{max-width:620px;margin:0 auto;padding:16px 12px 20px}
+.kicker{display:inline-flex;align-items:stretch;border:2px solid var(--blu);margin-bottom:14px}
+.kicker .n{background:var(--blu);color:#fff;font-weight:700;padding:3px 10px;font-size:14px}
+.kicker .l{color:var(--blu);font-weight:700;letter-spacing:.06em;font-size:12px;padding:5px 12px;text-transform:uppercase}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.1;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.dek{margin:0 0 10px;color:var(--ink2)}
+.istr{margin:0 0 18px;font-size:14px;color:var(--muted)}
+.step{display:block;width:100%;text-align:left;font-family:inherit;background:#fff;border:2px solid var(--grigio-chiaro);padding:12px 14px;cursor:pointer;color:var(--ink);position:relative}
+.step .top{display:flex;gap:12px;align-items:baseline}
+.step .num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--scuro);color:#fff;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;transform:translateY(-2px)}
+.step .t{font-weight:700;font-size:18px}
+.step .s{color:var(--ink2);font-size:15px;margin:2px 0 0 40px}
+.step .piu{position:absolute;right:12px;top:12px;font-size:13px;color:var(--blu-scuro)}
+.det{margin:8px 0 0 40px;font-size:15px;color:var(--ink2);display:none}
+.det ul{margin:4px 0 0;padding-left:18px}
+.step[aria-expanded="true"] .det{display:block}
+.freccia{height:22px;display:flex;justify-content:center}
+.freccia svg{display:block}
+.esiti{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.esito{font-family:inherit;background:#fff;border:2px solid var(--grigio-chiaro);padding:10px 10px 12px;text-align:left;cursor:pointer;color:var(--ink)}
+.esito .big{font-size:38px;font-weight:300;color:var(--blu);line-height:1}
+.esito .lab{font-weight:700;font-size:15px;margin-top:4px}
+.esito .sub{font-size:13px;color:var(--muted);margin-top:2px}
+.esito.on{background:var(--blu);border-color:var(--blu);color:#fff}
+.esito.on .big,.esito.on .sub{color:#fff}
+.desc{border-left:3px solid var(--blu);padding:4px 0 4px 14px;margin:14px 0 0;font-size:15px;color:var(--ink)}
+.barra{margin:26px 0 6px}
+.barra h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 8px;font-weight:700}
+.bar{display:flex;height:26px;gap:2px}
+.bar span{display:block;height:100%}
+.leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;margin-top:8px;color:var(--ink2)}
+.leg i{display:inline-block;width:12px;height:12px;margin-right:5px;vertical-align:-1px}
+.tratteggio{background:repeating-linear-gradient(135deg,var(--blu) 0 2px,#fff 2px 4px);outline:1px solid var(--blu);outline-offset:-1px}
+.fonte{border-top:2px solid var(--grigio-chiaro);margin-top:22px;padding-top:8px;font-size:12.5px;color:var(--ink2)}
+.fonte a{color:inherit}
+.sr{position:absolute;left:-9999px}
+@media (max-width:560px){.esiti{grid-template-columns:repeat(2,minmax(0,1fr))}.step .s,.det{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker"><span class="n">1</span><span class="l">Come funziona</span></div>
+  <h1>Il percorso del golden power</h1>
+  <p class="dek">Che cosa succede quando un'operazione tocca un'azienda strategica italiana: dalla notifica a Palazzo Chigi alla decisione del governo</p>
+
+  <p class="istr">Clicca sulle fasi e sugli esiti per leggere i dettagli.</p>
+
+  <div id="flusso">
+    <div class="step" data-step="1" role="button" tabindex="0" aria-expanded="false">
+      <span class="top"><span class="num">1</span><span class="t">L'operazione</span></span>
+      <span class="piu" aria-hidden="true">dettagli +</span>
+      <div class="s">Un'azienda con attività strategiche cambia proprietà o prende una decisione rilevante</div>
+      <div class="det">Rientrano acquisti di quote, fusioni, cessioni di rami d'azienda, licenze su tecnologie, delibere che cambiano il controllo e i contratti per le reti 5G. I settori sono tre:
+        <ul>
+          <li><b>difesa e sicurezza nazionale</b>: vale per qualunque acquirente, anche italiano;</li>
+          <li><b>reti 5G</b>: contratti e piani di acquisto degli operatori;</li>
+          <li><b>energia, trasporti, comunicazioni</b> e i settori indicati dall'Ue: sanità, agroalimentare, finanza, dati, semiconduttori.</li>
+        </ul></div>
+    </div>
+    <div class="freccia" aria-hidden="true"><svg width="14" height="22"><path d="M7 0v16M2 12l5 6 5-6" stroke="#9b9b9b" stroke-width="2" fill="none"/></svg></div>
+    <div class="step" data-step="2" role="button" tabindex="0" aria-expanded="false">
+      <span class="top"><span class="num">2</span><span class="t">La notifica</span></span>
+      <span class="piu" aria-hidden="true">dettagli +</span>
+      <div class="s">L'operazione va comunicata alla Presidenza del Consiglio prima di essere completata</div>
+      <div class="det">Chi non notifica rischia sanzioni e il governo può intervenire d'ufficio. Dal 2022 le aziende possono chiedere un parere preventivo (prenotifica). Molte notifiche sono prudenziali: le imprese notificano per sicurezza anche quando la norma potrebbe non applicarsi. Nel 2025 le notifiche sono state 903, contro le 83 del 2019.</div>
+    </div>
+    <div class="freccia" aria-hidden="true"><svg width="14" height="22"><path d="M7 0v16M2 12l5 6 5-6" stroke="#9b9b9b" stroke-width="2" fill="none"/></svg></div>
+    <div class="step" data-step="3" role="button" tabindex="0" aria-expanded="false">
+      <span class="top"><span class="num">3</span><span class="t">L'istruttoria</span></span>
+      <span class="piu" aria-hidden="true">dettagli +</span>
+      <div class="s">Un gruppo di ministeri a Palazzo Chigi valuta i rischi, entro 45 giorni</div>
+      <div class="det">Il Gruppo di coordinamento affida il dossier al ministero competente: Difesa, Economia, Imprese, Ambiente o Salute. Può chiedere documenti, convocare le aziende in audizione e sentire altre società o enti. Se l'investitore è extra-Ue, la notifica passa anche dalla Commissione europea e dagli altri Stati membri, che possono fare osservazioni. I 45 giorni si fermano quando il governo chiede informazioni.</div>
+    </div>
+    <div class="freccia" aria-hidden="true"><svg width="14" height="22"><path d="M7 0v16M2 12l5 6 5-6" stroke="#9b9b9b" stroke-width="2" fill="none"/></svg></div>
+    <div class="step" data-step="4" role="button" tabindex="0" aria-expanded="false">
+      <span class="top"><span class="num">4</span><span class="t">La decisione</span></span>
+      <span class="piu" aria-hidden="true">dettagli +</span>
+      <div class="s">Il Consiglio dei ministri decide e il presidente del Consiglio firma un decreto (d.P.C.M.)</div>
+      <div class="det">Se il gruppo di ministeri è d'accordo all'unanimità e le parti non si oppongono, il via libera può arrivare senza passare dal Consiglio dei ministri. Le decisioni possono essere impugnate davanti al Tar del Lazio.</div>
+    </div>
+    <div class="freccia" aria-hidden="true"><svg width="14" height="22"><path d="M7 0v16M2 12l5 6 5-6" stroke="#9b9b9b" stroke-width="2" fill="none"/></svg></div>
+
+    <div class="esiti" role="group" aria-label="I quattro esiti possibili, con i numeri del 2025">
+      <button class="esito" data-esito="A"><div class="big">443</div><div class="lab">Fuori ambito</div><div class="sub">la norma non si applica</div></button>
+      <button class="esito" data-esito="B"><div class="big">410</div><div class="lab">Via libera</div><div class="sub">nessun intervento</div></button>
+      <button class="esito" data-esito="C"><div class="big">44</div><div class="lab">Sì con condizioni</div><div class="sub">prescrizioni</div></button>
+      <button class="esito" data-esito="D"><div class="big">2</div><div class="lab">No</div><div class="sub">veto o opposizione</div></button>
+    </div>
+    <p class="desc" id="desc" aria-live="polite"></p>
+  </div>
+
+  <div class="barra">
+    <h3>Le 903 notifiche del 2025, per esito</h3>
+    <div class="bar" role="img" aria-label="Fuori ambito 443, via libera 410, con condizioni 44, bloccate 2, altro 4">
+      <span style="flex:443;background:var(--grigio-chiaro)"></span>
+      <span style="flex:410;background:var(--grigio)"></span>
+      <span style="flex:44;background:var(--blu)"></span>
+      <span style="flex:2;min-width:4px;background:var(--scuro)"></span>
+      <span style="flex:4;min-width:3px;background:#fff;outline:1px solid var(--bordo);outline-offset:-1px"></span>
+    </div>
+    <div class="leg">
+      <span><i style="background:var(--grigio-chiaro)"></i>Fuori ambito 443</span>
+      <span><i style="background:var(--grigio)"></i>Via libera 410</span>
+      <span><i style="background:var(--blu)"></i>Con condizioni 44</span>
+      <span><i style="background:var(--scuro)"></i>Bloccate 2</span>
+      <span><i style="background:#fff;outline:1px solid var(--bordo)"></i>Rinotificate o ritirate 4</span>
+    </div>
+  </div>
+
+  <div class="fonte">Fonte: Presidenza del Consiglio dei ministri, <a href="https://documenti.camera.it" target="_blank" rel="noopener">Relazioni al Parlamento sui poteri speciali</a> 2016-2025 (decreto-legge 15 marzo 2012, n. 21). I numeri si riferiscono alle notifiche del 2025: le 44 con condizioni comprendono 29 operazioni e 15 piani 5G; le 410 con via libera comprendono 78 operazioni interne a uno stesso gruppo e 6 piani 5G.</div>
+</div>
+
+<script>
+const ESITI={
+  A:"Quasi metà delle notifiche si chiude così: l'operazione non riguarda attività strategiche o non supera le soglie, quindi il governo non ha nulla da decidere.",
+  B:"Il governo esamina l'operazione e decide di non usare i poteri speciali. A volte accompagna il via libera con raccomandazioni. Per le operazioni interne a uno stesso gruppo c'è una procedura semplificata.",
+  C:"L'operazione va avanti, ma l'acquirente deve rispettare impegni fissati nel decreto: mantenere in Italia produzione, tecnologie e centri di ricerca, garantire le forniture alle Forze armate, proteggere dati sensibili, avere manager italiani nelle funzioni chiave. Un ministero o un comitato controlla nel tempo che le condizioni siano rispettate; chi le viola rischia sanzioni.",
+  D:"Il governo blocca l'operazione. Con il veto annulla una delibera o un atto; con l'opposizione all'acquisto l'acquirente perde i diritti di voto, le delibere prese con i suoi voti sono nulle e deve rivendere le quote. Dal 2014 è successo 16 volte, 8 delle quali con controparti cinesi."
+};
+const steps=[...document.querySelectorAll('.step')],esiti=[...document.querySelectorAll('.esito')],desc=document.getElementById('desc');
+const tog=s=>{s.setAttribute('aria-expanded',s.getAttribute('aria-expanded')==='true'?'false':'true');s.querySelector('.piu').textContent=s.getAttribute('aria-expanded')==='true'?'chiudi −':'dettagli +';};
+steps.forEach(s=>{s.addEventListener('click',()=>tog(s));s.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog(s);}});});
+function mostraEsito(k){esiti.forEach(e=>{e.classList.toggle('on',e.dataset.esito===k);});desc.textContent=k?ESITI[k]:"Clicca su un esito per sapere che cosa comporta.";}
+esiti.forEach(e=>e.addEventListener('click',()=>mostraEsito(e.dataset.esito)));
+mostraEsito(null);
+let ultimaH=0;function h(){const v=Math.ceil(document.querySelector('.wrap').getBoundingClientRect().height);if(v!==ultimaH){ultimaH=v;parent.postMessage({gpEmbed:'flusso',height:v},'*');}}
+new ResizeObserver(h).observe(document.querySelector('.wrap'));addEventListener('load',h);addEventListener('click',()=>setTimeout(h,50));setInterval(h,500);
+</script>
+</body>
+</html>
